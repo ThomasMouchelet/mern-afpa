@@ -7,7 +7,7 @@ const CustomerController = {
             await customer.save();
             res.send(customer)
         } catch (error) {
-            res.send(400, error)
+            res.status(400).send(error)
         }
     },
     findAll: async (req, res) => {
@@ -15,7 +15,7 @@ const CustomerController = {
             const customersList = await Customer.find()
             res.send(customersList)
         } catch (error) {
-            res.send(400, error)
+            res.status(400).send(error)
         }
     },
     findOne: async (req, res) => {
@@ -23,7 +23,7 @@ const CustomerController = {
             const customer = await Customer.findById(req.params.id)
             res.send(customer)
         } catch (error) {
-            res.send(400, error)
+            res.status(400).send(error)
         }
     },
     delete: async (req, res) => {
@@ -31,7 +31,15 @@ const CustomerController = {
             await Customer.deleteOne({ "_id": req.params.id })
             res.sendStatus(200)
         } catch (error) {
-            res.send(400, error)
+            res.status(400).send(error)
+        }
+    },
+    findAllInvoices: async (req, res) => {
+        try {
+            const invoicesList = await Customer.findById(req.params.id).populate('invoices')
+            res.send(invoicesList)
+        } catch (error) {
+            res.status(400).send(error)
         }
     }
 }

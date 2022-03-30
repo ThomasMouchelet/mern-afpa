@@ -3,7 +3,6 @@ const Customer = require('../models/customer.model');
 
 const InvoiceController = {
     create: async (req, res) => {
-
         try {
             const customerId = req.body.customer._id
             const customer = await Customer.findById(customerId)

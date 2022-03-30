@@ -1,7 +1,9 @@
 const express = require('express')
 const app = express()
+const connexion = require('./config/database')
 const CustomerController = require('./src/controllers/customer.controller')
 
+connexion()
 app.use(express.json())
 
 app.get('/', function (req, res) {

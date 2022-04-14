@@ -15,3 +15,5 @@ app.use('/api', customerRouter)
 app.use('/api', invoiceRouter)
 
 app.listen(3000)
+
+module.exports = app

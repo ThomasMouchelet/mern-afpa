@@ -1,13 +1,23 @@
 const Customer = require('../models/customer.model');
+const User = require('../models/user.model');
 
 const CustomerController = {
     create: async (req, res) => {
         const email = req.email
         console.log(email)
+        const user = await User.findOne({ email })
+        const newCustomer = {
+            ...req.body,
+            user: user._id
+        }
 
         try {
-            const customer = new Customer(req.body)
+            const customer = new Customer(newCustomer)
             await customer.save();
+
+            user.customers.push(customer)
+            user.save()
+
             res.send(customer)
         } catch (error) {
             res.status(400).send(error)

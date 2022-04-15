@@ -4,6 +4,8 @@ module.exports.createCustomer = async (app, request) => {
     const responseSignin = await signin(app, request)
     const { accessToken } = responseSignin.body
 
+    console.log("accessToken : ", accessToken)
+
     const response = await request(app)
         .post('/api/customers')
         .set('Authorization', 'bearer ' + accessToken)
@@ -14,6 +16,13 @@ module.exports.createCustomer = async (app, request) => {
 
     expect(response.statusCode).toBe(200)
     expect(response.type).toBe("application/json")
+    expect(response.body).toEqual(expect.objectContaining({
+        _id: expect.any(String),
+        email: expect.any(String),
+        companyName: expect.any(String),
+        invoices: expect.any(Array),
+        user: expect.any(String),
+    }))
 
     return response
 }

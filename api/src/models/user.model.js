@@ -7,7 +7,11 @@ const userSchema = new Schema({
     },
     password: {
         type: String
-    }
+    },
+    customers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Customer"
+    }]
 })
 
 module.exports = mongoose.model('User', userSchema)

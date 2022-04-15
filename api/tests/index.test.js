@@ -18,14 +18,29 @@ const { signup, signin } = require('./auth');
 //     })
 // })
 
-describe('Get list of customers for one user', () => {
-    beforeAll(() => {
-        signup(app, request)
-        createCustomer(app, request)
+// describe('Get list of customers for one user', () => {
+//     beforeAll(() => {
+//         signup(app, request)
+//         createCustomer(app, request)
+//     })
+
+//     test("Get all customers", async () => {
+//         await getAllCustomer(app, request)
+//     })
+
+//     afterAll(() => {
+//         usersDatabaseClear()
+//         customersDatabaseClear()
+//     })
+// })
+
+describe("Create new customer", () => {
+    beforeAll(async () => {
+        await signup(app, request)
     })
 
-    test("Get all customers", async () => {
-        await getAllCustomer(app, request)
+    test("Create customer", async () => {
+        await createCustomer(app, request)
     })
 
     afterAll(() => {

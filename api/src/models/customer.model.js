@@ -9,6 +9,10 @@ const customerSchema = new Schema({
     companyName: {
         type: String,
     },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
     invoices: [
         {
             type: mongoose.Schema.Types.ObjectId,

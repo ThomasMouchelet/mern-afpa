@@ -1,16 +1,30 @@
 const app = require('../index')
 const request = require('supertest');
-const { customersDatabaseClear, invoicesDatabaseClear } = require('./utils');
-const { creatUser, getAllUser } = require('./user');
+const { customersDatabaseClear, invoicesDatabaseClear, usersDatabaseClear } = require('./utils');
+const { creatUser, getAllUser } = require('./customer');
 const { createInvoice } = require('./invoice');
+const { signup, signin } = require('./auth');
 
+describe('User register and login', () => {
+    test("User create account with email and password receive json web token", async () => {
+        await signup(app, request)
+    })
+    test("User signin with email and password receive json web token", async () => {
+        await signin(app, request)
+    })
+
+    afterAll(() => {
+        usersDatabaseClear()
+    })
+})
+/*
 describe("User tests", () => {
     test('Create new customer', async () => {
-        creatUser(app, request)
+        await creatUser(app, request)
     })
 
     test("Get all customers", async () => {
-        getAllUser(app, request)
+        await getAllUser(app, request)
     })
 
     afterAll(() => {
@@ -20,7 +34,7 @@ describe("User tests", () => {
 
 describe('Create a new invoice', () => {
     test('Create new invoice', async () => {
-        createInvoice(app, request)
+        await createInvoice(app, request)
     })
 
     afterAll(() => {
@@ -28,4 +42,4 @@ describe('Create a new invoice', () => {
         invoicesDatabaseClear()
     })
 })
-
+*/

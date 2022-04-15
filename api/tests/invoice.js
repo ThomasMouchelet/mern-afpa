@@ -1,4 +1,4 @@
-const { creatUser } = require("./user")
+const { creatUser } = require("./customer")
 
 module.exports.createInvoice = async (app, request) => {
     const responseCustomer = await creatUser(app, request)

@@ -2,6 +2,9 @@ const Customer = require('../models/customer.model');
 
 const CustomerController = {
     create: async (req, res) => {
+        const email = req.email
+        console.log(email)
+
         try {
             const customer = new Customer(req.body)
             await customer.save();
